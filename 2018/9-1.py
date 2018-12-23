@@ -30,25 +30,16 @@ while n < end:
     n += 1
     if n % NUMBER == 0:
         score[player] += n
-        # print('remove', current, len(seq), n)
         to_remove_index = current - STEP2
-        # if to_remove_index < 0:
-        #     print(to_remove_index)
-        score[player] += seq.pop(to_remove_index)
-        # if current < 0:
-        #     current = len(seq) - to_remove_index
-        # else:
-        #     current = to_remove_index
+        to_add_score = seq.pop(to_remove_index)
+        score[player] += to_add_score
         current = to_remove_index
-        # if current < 0:
-        #     print(current, 'less 0 ')
     else:
         index = current + STEP1
         if index > len(seq):
             index -= len(seq)
         seq.insert(index, n)
         current = index
-        # print('current', current, len(seq))
 
     next_player = player + 1
     if next_player > players:
@@ -57,5 +48,4 @@ while n < end:
 
 
 print(max(score.values()))
-
 # 388593 - your answer is too high
