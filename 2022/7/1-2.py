@@ -49,18 +49,22 @@ if __name__ == '__main__':
             print(dir)
             print(files_sum)
             print()
+        files_sum_int = 0
         for d in dirs:
             if d in dir and d != dir and d != "/":
                 print("----")
                 print(d, dir)
                 print(files_sum)
-                files_sum += sum(dirs[d])
-                print(files_sum)
-                if files_sum <= MAX:
-                    total += files_sum
-                    print("total2", files_sum, total)
+                files_sum_int += sum(dirs[d])
                 if d in dir_files:
                     dir_files[d] = 0
+        files_sum += files_sum_int
+        print("anton")
+        print(files_sum)
+        if files_sum <= MAX:
+            total += files_sum
+            print("total2", files_sum, total)
+
     print("END")
 
     for dir in dir_files:
