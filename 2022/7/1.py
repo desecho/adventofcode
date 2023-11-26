@@ -1,11 +1,17 @@
 import re
 
-FILENAME = 'input0.txt'
+FILENAME = 'input.txt'
 MAX = 100000
 
 def load_lines(filename):
     with open(filename) as file:
         return file.read().splitlines()
+
+def add_total(total, size):
+    if size <= MAX:
+        total += size
+    return total
+
 
 cd_pattern = re.compile(r'\$ cd ([\/a-zA-Z]+)')
 cd_back_pattern = re.compile(r'\$ cd \.\.')
@@ -14,7 +20,6 @@ dir_pattern = re.compile(r'dir ([a-zA-Z]+)')
 
 if __name__ == '__main__':
     lines = load_lines(FILENAME)
-    dir_files = {}
     total = 0
     dirs = {}
     root_dir = ""
@@ -39,33 +44,14 @@ if __name__ == '__main__':
         elif cd_back_match:
             root_dir = "/".join(root_dir.split("/")[:-1])
 
-    print(dirs)
+    for dir in dirs:
+        dirs[dir] = sum(dirs[dir])
 
     for dir in dirs:
-        files = dirs[dir]
-        files_sum = sum(files)
-        if files_sum <= MAX:
-            dir_files[dir] = files_sum
-            print(dir)
-            print(files_sum)
-            print()
         for d in dirs:
-            if d in dir and d != dir and d != "/":
-                print("----")
-                print(d, dir)
-                print(files_sum)
-                files_sum += sum(dirs[d])
-                print(files_sum)
-                if files_sum <= MAX:
-                    total += files_sum
-                    print("total2", files_sum, total)
-                if d in dir_files:
-                    dir_files[d] = 0
-    print("END")
+            if d.startswith(dir) and d != dir and dir != "/" and d != "/":
+                dirs[dir] += dirs[d]
 
-    for dir in dir_files:
-        files_sum = dir_files[dir]
-        if files_sum <= MAX:
-            total += files_sum
-    print(dir_files)
+    for dir in dirs:
+        total = add_total(total, dirs[dir])
     print(total)
