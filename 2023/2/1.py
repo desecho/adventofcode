@@ -23,10 +23,10 @@ if __name__ == '__main__':
         game_id = int(main_match.group(1))
         game = main_match.group(2)
         sets = game.split(";")
-        blue = 0
-        green = 0
-        red = 0
         for set in sets:
+            blue = 0
+            green = 0
+            red = 0
             set = set.strip()
             balls = set.split(",")
             for ball in balls:
@@ -40,8 +40,9 @@ if __name__ == '__main__':
                     green += int(green_match.group(1))
                 elif red_match:
                     red += int(red_match.group(1))
-        if blue <= BLUE and green <= GREEN and red <= RED:
-            print(game_id)
-            result += game_id
+            print(red, green, blue)
+        # if blue <= BLUE and green <= GREEN and red <= RED:
+        #     print(game_id)
+        #     result += game_id
 
     print(result)
