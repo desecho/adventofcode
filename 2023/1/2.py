@@ -23,9 +23,14 @@ def convert_digits(value: str):
         if pos != -1:
             poss.append((pos, key, digit))
     poss.sort(key=lambda x: x[0])
+    final_value = value
     for pos, key, digit in poss:
-        value = value.replace(key, str(digit))
-    return value
+        final_value = final_value.replace(key, str(digit), 1)
+
+    if final_value == value:
+        return final_value
+
+    return convert_digits(final_value)
 
 def find_first_digit(value):
     for char in value:
@@ -45,12 +50,13 @@ if __name__ == '__main__':
     lines = load_lines(FILENAME)
     result = 0
     for line in lines:
-        # print(line)
-        line_converted = convert_digits(line)
-        print(line_converted)
-        x = find_first_digit(line_converted)
-        y = find_second_digit(line_converted)
-        # print(x + y)
+        print(line)
+        line = convert_digits(line)
+        print(line)
+        x = find_first_digit(line)
+        y = find_second_digit(line)
+        print(x + y)
+        print()
         result += int(x + y)
 
     print(result)
