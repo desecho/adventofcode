@@ -23,7 +23,9 @@ if __name__ == '__main__':
         game_id = int(main_match.group(1))
         game = main_match.group(2)
         sets = game.split(";")
-        possible = True
+        blue_min = 0
+        green_min = 0
+        red_min = 0
         for set in sets:
             blue = 0
             green = 0
@@ -36,14 +38,17 @@ if __name__ == '__main__':
                 green_match = green_pattern.match(ball)
                 red_match = red_pattern.match(ball)
                 if blue_match:
-                    blue += int(blue_match.group(1))
+                    blue = int(blue_match.group(1))
                 elif green_match:
-                    green += int(green_match.group(1))
+                    green = int(green_match.group(1))
                 elif red_match:
-                    red += int(red_match.group(1))
-            if blue > BLUE or green > GREEN or red > RED:
-                possible = False
-        if possible:
-            result += game_id
+                    red = int(red_match.group(1))
+                if blue > blue_min:
+                    blue_min = blue
+                if green > green_min:
+                    green_min = green
+                if red > red_min:
+                    red_min = red
 
+        result += blue_min * green_min * red_min
     print(result)
