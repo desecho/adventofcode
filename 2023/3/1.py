@@ -1,7 +1,7 @@
 
-FILENAME = 'input0.txt'
+FILENAME = 'input.txt'
 
-SYMBOLS = "*#+$-/&%"
+SYMBOLS = "*#+$-/&%@%=~"
 
 def load_lines(filename):
     with open(filename) as file:
@@ -24,26 +24,20 @@ def is_part_number(lines, number_tuple):
     y_pos = position[1]
     potential_symbols = []
     # Check if the number is close to a symbol
-    potential_symbols.append(lines[x_pos-1][y_pos])
-    potential_symbols.append(lines[position[0]+1][y_pos])
+    potential_symbols.append(lines[y_pos][x_pos])
+    potential_symbols.append(lines[y_pos][position[0]+1])
     for i in range(number_length + 2):
-        print(x_pos+i, y_pos-1)
-        print(x_pos+i, y_pos+1)
-        potential_symbols.append(lines[x_pos+i][y_pos-1])
-        potential_symbols.append(lines[x_pos+i][y_pos+1])
+        potential_symbols.append(lines[y_pos-1][x_pos+i])
+        potential_symbols.append(lines[y_pos+1][x_pos+i])
 
-    print(potential_symbols)
     for symbol in potential_symbols:
         if symbol in SYMBOLS:
             return True
-    print(number)
     return False
 
 if __name__ == '__main__':
     lines = load_lines(FILENAME)
     lines = enhance_lines(lines)
-    for line in lines:
-        print(line)
     result = 0
     numbers = []
     for i in range(len(lines)):
@@ -63,5 +57,4 @@ if __name__ == '__main__':
     for number in numbers:
         if is_part_number(lines, number):
             result += number[0]
-    print(numbers)
     print(result)
