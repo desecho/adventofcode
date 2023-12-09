@@ -40,11 +40,11 @@ if __name__ == '__main__':
         numbers = list(get_numbers(num_string))
         games[game_id] = (numbers, winning_numbers)
         final_result = play_game(cards, game_id, numbers, winning_numbers, final_result)
-
     final_result += len(lines)
+    print(cards)
     while len(cards) > 0:
         card = cards[0]
         final_result = play_game(cards, card, games[card][0], games[card][1], final_result)
         cards.pop(0)
-
+        print(cards)
     print(final_result)
