@@ -3,7 +3,7 @@ FILENAME = 'input.txt'
 
 SYMBOL = "*"
 
-symbols = {}
+symbols = []
 
 def load_lines(filename):
     with open(filename) as file:
@@ -26,14 +26,14 @@ def check_part_number(lines, number_tuple):
     y_pos = position[1]
     # Check if the number is close to a symbol
     if lines[y_pos][x_pos] == SYMBOL:
-        symbols[number] = (y_pos, x_pos)
+        symbols.append((number, (y_pos, x_pos)))
     if lines[y_pos][position[0]+1] == SYMBOL:
-        symbols[number] = (y_pos, position[0]+1)
+        symbols.append((number, (y_pos, position[0]+1)))
     for i in range(number_length + 2):
         if lines[y_pos-1][x_pos+i] == SYMBOL:
-            symbols[number] = (y_pos-1, x_pos+i)
+            symbols.append((number, (y_pos-1, x_pos+i)))
         if lines[y_pos+1][x_pos+i] == SYMBOL:
-            symbols[number] = (y_pos+1, x_pos+i)
+            symbols.append((number, (y_pos+1, x_pos+i)))
 
 if __name__ == '__main__':
     lines = load_lines(FILENAME)
@@ -58,10 +58,10 @@ if __name__ == '__main__':
         check_part_number(lines, number)
 
     coords = {}
-    for number in symbols:
-        if symbols[number] not in coords:
-            coords[symbols[number]] = []
-        coords[symbols[number]].append(number)
+    for number, pos in symbols:
+        if pos not in coords:
+            coords[pos] = []
+        coords[pos].append(number)
 
     for coord in coords:
         if len(coords[coord]) == 2:
