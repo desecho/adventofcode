@@ -28,7 +28,6 @@ def play_game(cards, game_id, numbers, winning_numbers, final_result):
     for i in range(game_id + 1, result+game_id+1):
         cards.append(i)
 
-
     return final_result
 
 main_pattern = re.compile(r'Card +([\d]+): (.+)')
