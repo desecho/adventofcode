@@ -1,4 +1,4 @@
-FILENAME = 'input0.txt'
+FILENAME = 'input.txt'
 
 CARDS = "23456789TJQKA"
 
@@ -54,17 +54,17 @@ def get_score(set):
 
 def get_sort_value(set):
     if is_five_of_a_kind(set[0]):
-        return 10000000000 + get_score(set[0])
+        return 10000000000000000 + get_score(set[0])
     elif is_four_of_a_kind(set[0]):
-        return 9000000000 + get_score(set[0])
+        return 900000000000000 + get_score(set[0])
     elif is_full_house(set[0]):
-        return 8000000000 + get_score(set[0])
+        return 80000000000000 + get_score(set[0])
     elif is_three_of_a_kind(set[0]):
-        return 7000000000 + get_score(set[0])
+        return 7000000000000 + get_score(set[0])
     elif is_two_pairs(set[0]):
-        return 6000000000+ get_score(set[0])
+        return 600000000000+ get_score(set[0])
     elif is_one_pair(set[0]):
-        return 5000000000+ get_score(set[0])
+        return 50000000000+ get_score(set[0])
     else:
         return 1000000000+ get_score(set[0])
 
