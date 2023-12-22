@@ -17,9 +17,8 @@ def is_four_of_a_kind(set):
 
 def is_full_house(set):
     for card in set:
-        set_copy = set
         if set.count(card) == 3:
-            set_copy.replace(card, "")
+            set_copy = set.replace(card, "")
             if set_copy[0] == set_copy[1]:
                 return True
     return False
@@ -32,9 +31,8 @@ def is_three_of_a_kind(set):
 
 def is_two_pairs(set):
     for card in set:
-        set_copy = set
         if set.count(card) == 2:
-            set_copy.replace(card, "")
+            set_copy = set.replace(card, "")
             return is_one_pair(set_copy)
     return False
 
@@ -48,25 +46,25 @@ def get_score(set):
     score = 0
     set = set[::-1]
     for x in range(len(set)):
-        score += CARDS.index(set[x]) * 10 ** x
+        score += CARDS.index(set[x]) * (100 ** (x+1))
     print(set, score)
     return score
 
 def get_sort_value(set):
     if is_five_of_a_kind(set[0]):
-        return 10000000000000000 + get_score(set[0])
+        return 10000000000000000000000 + get_score(set[0])
     elif is_four_of_a_kind(set[0]):
-        return 900000000000000 + get_score(set[0])
+        return 90000000000000000000 + get_score(set[0])
     elif is_full_house(set[0]):
-        return 80000000000000 + get_score(set[0])
+        return 700000000000000000 + get_score(set[0])
     elif is_three_of_a_kind(set[0]):
-        return 7000000000000 + get_score(set[0])
+        return 6000000000000000 + get_score(set[0])
     elif is_two_pairs(set[0]):
-        return 600000000000+ get_score(set[0])
+        return 50000000000000 + get_score(set[0])
     elif is_one_pair(set[0]):
-        return 50000000000+ get_score(set[0])
+        return 400000000000 + get_score(set[0])
     else:
-        return 1000000000+ get_score(set[0])
+        return 1000000000 + get_score(set[0])
 
 if __name__ == '__main__':
     lines = load_lines(FILENAME)
