@@ -83,9 +83,9 @@ def get_score(set):
 def get_sort_value(set):
     processed_set = process_set(set[0])
     unprocessed_set = [set[0]]
-    if is_five_of_a_kind(processed_set):
-        return 100000000000000000000000000000000000000000000000 + get_score(set[0])
     if is_five_of_a_kind(unprocessed_set):
+        return 100000000000000000000000000000000000000000000000 + get_score(set[0])
+    if is_five_of_a_kind(processed_set):
         return 900000000000000000000000000000000000000000000 + get_score(set[0])
     elif is_four_of_a_kind(unprocessed_set):
         return 90000000000000000000 + get_score(set[0])
