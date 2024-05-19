@@ -14,6 +14,12 @@ def get_direction(directions):
     for direction in cycle(directions):
         yield direction
 
+def all_positions_end_with_z(positions):
+    for pos in positions:
+        if pos[-1] != "Z":
+            return False
+    return True
+
 if __name__ == '__main__':
     lines = load_lines(FILENAME)
     map = {}
@@ -23,13 +29,26 @@ if __name__ == '__main__':
     instructions = load_lines(FILENAME_INSTRUCTIONS)[0]
     direction_gen = get_direction(instructions)
 
-    current = 'AAA'
+    starting_positions = []
+    for key in map:
+        if key[-1] == "A":
+            starting_positions.append(key)
+
+    # for i, position in enumerate(starting_positions):
+    #     print(i, position)
+
+    positions = starting_positions
+
     counter = 0
-    while current != 'ZZZ':
+    while not all_positions_end_with_z(positions):
         counter += 1
         direction = next(direction_gen)
         if direction == 'L':
-            current = map[current][0]
+            for i, pos in enumerate(positions):
+                positions[i] = map[positions[i]][0]
         else:
-            current = map[current][1]
+            for i, pos in enumerate(positions):
+                positions[i] = map[positions[i]][1]
+        print(counter)
+    print("answer")
     print(counter)
