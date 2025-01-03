@@ -2,7 +2,7 @@ from itertools import product
 
 FILENAME = 'input.txt'
 
-OPERATORS = "+*"
+OPERATORS = "+*|"
 
 def load_lines(filename):
     with open(filename) as file:
@@ -34,6 +34,8 @@ def is_valid_record(r):
                 r += numbers[i+1]
             elif os[i] == "*":
                 r *= numbers[i+1]
+            elif os[i] == "|":
+                r = int(str(r) + str(numbers[i+1]))
         if r == result:
             return True
 
