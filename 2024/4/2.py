@@ -1,5 +1,3 @@
-import re
-
 FILENAME = 'input.txt'
 
 def load_lines(filename):

@@ -1,5 +1,3 @@
-import re
-
 FILENAME = 'input.txt'
 WORD = "XMAS"
 WORD_LENGTH = 4
