@@ -33,6 +33,11 @@ def sub(point1, point2):
     y = point1[1] - point2[1]
     return (x, y)
 
+def mul(point, n):
+    x = point[0] * n
+    y = point[1] * n
+    return (x, y)
+
 
 if __name__ == "__main__":
     lines = load_lines(FILENAME)
@@ -67,16 +72,25 @@ if __name__ == "__main__":
             s.add(z2)
             s.add(z3)
             s.add(z4)
-            if a in s:
-                s.remove(a)
-            if b in s:
-                s.remove(b)
+
+            for l in range(2,len(grid) + 1):
+                diff_l = mul(diff, l)
+                z1 = add(a, diff_l)
+                z2 = add(b, diff_l)
+                z3 = sub(a, diff_l)
+                z4 = sub(b, diff_l)
+                s.add(z1)
+                s.add(z2)
+                s.add(z3)
+                s.add(z4)
+
             antinodes = list(s)
-            assert len(s) == 2
+
             for a in antinodes:
                 x, y = a
                 if x < len(grid) and y < len(grid) and x >= 0 and y >= 0:
                     grid_antinodes[x][y] = "#"
+                    grid[x][y] = "#"
 
     # count antinodes
     counter = 0
