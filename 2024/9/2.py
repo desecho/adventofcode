@@ -12,27 +12,28 @@ def is_even(n):
 
 def find_subsequence(arr, sub):
     for i in range(len(arr) - len(sub) + 1):
-        if arr[i:i+len(sub)] == sub:
+        if arr[i : i + len(sub)] == sub:
             return i
     return -1
 
+
 def get_max(x):
-    x = [z for z in x if z != '.']
+    x = [z for z in x if z != "."]
     return max(x)
+
 
 def defrag(x):
     max_id = get_max(x)
     for i in range(max_id, 0, -1):
-        print(i/max_id)
+        print(i / max_id)
         n = x.count(i)
-        l = find_subsequence(x, list('.'*n))
+        l = find_subsequence(x, list("." * n))
         z = x.index(i)
         if l != -1 and z > l:
-            for j in range(l, l+n):
+            for j in range(l, l + n):
                 x[j] = i
-            for j in range(z, z+n):
-                x[j] = '.'
-
+            for j in range(z, z + n):
+                x[j] = "."
 
 
 if __name__ == "__main__":
@@ -49,7 +50,7 @@ if __name__ == "__main__":
             id += 1
         else:
             for j in range(n):
-                result1.append('.')
+                result1.append(".")
 
     print("Phase1 complete")
     print(result1)
@@ -64,7 +65,7 @@ if __name__ == "__main__":
 
     for i in range(len(result1)):
         value = result1[i]
-        if value != '.':
+        if value != ".":
             result2 += i * int(value)
 
     print(result2)
