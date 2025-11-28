@@ -1,4 +1,4 @@
-FILENAME = "input0.txt"
+FILENAME = "input.txt"
 
 
 def load_data(filename):
@@ -27,20 +27,21 @@ if __name__ == "__main__":
     data = load_data(FILENAME)
     data = list(data)
 
-    result1 = ""
+    result1 = []
     id = 0
     for i in range(1, len(data) + 1):
         n = int(data[i - 1])
         if not is_even(i):
-            result1 += str(id) * n
+            for j in range(n):
+                result1.append(id)
             id += 1
         else:
-            result1 += "." * n
+            for j in range(n):
+                result1.append('.')
 
     print("Phase1 complete")
     print(result1)
 
-    result1 = list(result1)
     defragged = False
     while not defragged:
         defrag(result1)
