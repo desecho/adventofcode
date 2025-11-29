@@ -8,7 +8,7 @@ def load_lines(filename):
         return file.read().splitlines()
 
 
-def process1(n, data, l):
+def process(n, data, l):
     r = []
     m = None
     for x in data:
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     data_copy = deepcopy(data)
 
     for x in range(len(data[0])):
-        m = process1(x, data, '0')
+        m = process(x, data, '0')
         data = [z for z in data if z[x] == m]
         if len(data) == 1:
             break
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     print(data)
 
     for x in range(len(data_copy[0])):
-        m = process1(x, data_copy, '1')
+        m = process(x, data_copy, '1')
         data_copy = [z for z in data_copy if z[x] == m]
         if len(data_copy) == 1:
             break
