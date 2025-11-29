@@ -1,6 +1,3 @@
-from pprint import pprint
-from copy import deepcopy
-
 FILENAME = "input.txt"
 
 
@@ -27,13 +24,11 @@ def mark_number(b, n):
 def is_winning(b):
     for l in b:
         if all([z[1] for z in l]):
-            pprint(b)
             return True
 
-    b2 = deepcopy(b)
+    b2 = transpose(b)
     for l in b2:
         if all([z[1] for z in l]):
-            print(b2)
             return True
 
     return False
@@ -43,10 +38,7 @@ def calculate_answer(b, n):
     for i in b:
         for j in i:
             if not j[1]:
-                print(j[0])
                 sum += j[0]
-    print(sum)
-    print(n)
     return sum * n
 
 
