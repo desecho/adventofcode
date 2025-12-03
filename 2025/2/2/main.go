@@ -17,17 +17,43 @@ func loadData() string {
 	return string(data)
 }
 
+func createFullNumber(s string, l int) string {
+	result := s
+	for i := 0; i < l; i++ {
+		result += s
+		if len(result) == l {
+			return result
+		}
+	}
+	return ""
+}
+
+
+func isInvalid(id int) bool {
+	x := strconv.Itoa(id)
+	if len(x) % 2 == 0 {
+		z := len(x) / 2
+		m1 := x[0:z]
+		m2 := x[z:]
+		if m1 == m2 {
+			return true
+		}
+	}
+	for i:=1;i<= len(x) / 2; i++ {
+		l := x[0:i]
+		if createFullNumber(l, len(x)) == x {
+			return true
+		}
+	}
+
+	return false
+}
+
 func findInvalidIDs(n1 int, n2 int) []int {
 	var invalidIDs []int
 	for i := n1; i <= n2; i++ {
-		x := strconv.Itoa(i)
-		if len(x) % 2 == 0 {
-			z := len(x) / 2
-			m1 := x[0:z]
-			m2 := x[z:]
-			if m1 == m2 {
-				invalidIDs = append(invalidIDs, i)
-			}
+		if isInvalid(i) {
+			invalidIDs = append(invalidIDs, i)
 		}
 	}
 	return invalidIDs
