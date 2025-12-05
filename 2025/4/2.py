@@ -64,13 +64,22 @@ def is_accessible(grid, pos):
     return counter < THRESHOLD
 
 
-if __name__ == "__main__":
-    data = load_data()
-    grid = [list(x) for x in data]
-    counter = 0
+def calculate(grid, counter):
+    counter_orig = counter
     for i in range(len(grid)):
         for j in range(len(grid)):
             if is_accessible(grid, (i, j)):
                 counter += 1
+                grid[i][j] = '.'
 
+    if counter == counter_orig:
+        return counter
+    return calculate(grid, counter)
+
+
+if __name__ == "__main__":
+    data = load_data()
+    grid = [list(x) for x in data]
+
+    counter = calculate(grid, 0)
     print(counter)
