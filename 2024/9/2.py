@@ -9,7 +9,7 @@ def load_data(filename):
 def is_even(n):
     return n % 2 == 0
 
-
+# Function made with AI
 def find_subsequence(arr, sub):
     for i in range(len(arr) - len(sub) + 1):
         if arr[i : i + len(sub)] == sub:

@@ -1,6 +1,6 @@
 FILENAME = "input.txt"
 
-
+# Function made with AI
 def transpose(x):
     return list(map(list, zip(*x)))
 
