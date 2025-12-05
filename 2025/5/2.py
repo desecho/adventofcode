@@ -1,8 +1,28 @@
-FILENAME = "input0.txt"
+FILENAME = "input.txt"
 
 def load_data():
     with open(FILENAME) as file:
         return file.read().splitlines()
+
+
+# Function made with AI
+def merge_ranges(ranges):
+    # Sort by start value
+    ranges.sort(key=lambda x: x[0])
+
+    merged = []
+    current_start, current_end = ranges[0]
+
+    for start, end in ranges[1:]:
+        if start <= current_end:  # overlapping or touching
+            current_end = max(current_end, end)
+        else:
+            merged.append((current_start, current_end))
+            current_start, current_end = start, end
+
+    merged.append((current_start, current_end))
+
+    return merged
 
 
 if __name__ == "__main__":
@@ -24,12 +44,10 @@ if __name__ == "__main__":
 
     # process
 
-    # values = set()
-    # for r in ranges:
-    #     for x in range(r[0], r[1] + 1):
-    #         values.add(x)
+    ranges = merge_ranges(ranges)
+    counter = 0
+    for r in ranges:
+        x = r[1] - r[0]
+        counter += x + 1
 
-    # result = len(values)
-    # print(result)
-
-    print(ranges)
+    print(counter)
