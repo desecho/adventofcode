@@ -1,9 +1,7 @@
 from copy import deepcopy
-from pprint import pprint
 
 FILENAME = "input.txt"
 split_positions = set()
-paths = set()
 counter = 0
 
 def load_data():
@@ -77,6 +75,3 @@ if __name__ == "__main__":
     s = start(data[1:])
     count(s, data[1:])
     print(counter)
-    # print(len(paths))
-
-    paths = list(paths)

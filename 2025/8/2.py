@@ -59,7 +59,9 @@ if __name__ == "__main__":
 
     distances = sorted(distances, key=lambda x: x[1])
     circuits = []
-    for x in range(N):
+    last = None
+    z = False
+    for x in range(len(distances)):
         v = distances[x][0]
         added = False
         for c in circuits:
@@ -67,20 +69,21 @@ if __name__ == "__main__":
                 if z == v[0] and v[1] not in c:
                     c.append(v[1])
                     added = True
+                    last = (z, v[1])
                 if z == v[1] and not added and v[0] not in c:
                     c.append(v[0])
                     added = True
+                    last = (z, v[0])
                 if added:
                     break
             if added:
                 break
+            z = True
         if not added:
             circuits.append(list(v))
 
+        circuits = process_circuits(circuits)
+        if len(circuits) == 1 and z:
+            break
 
-    circuits = process_circuits(circuits)
-
-    r = [len(x) for x in circuits]
-    r.sort()
-
-    print(r[-1] * r[-2] * r[-3])
+    print(last[0][0] * last[1][0])
