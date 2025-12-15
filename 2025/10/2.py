@@ -1,7 +1,7 @@
 from itertools import combinations
 import re
 
-FILENAME = "input.txt"
+FILENAME = "input0.txt"
 
 def load_data():
     with open(FILENAME) as file:
@@ -29,17 +29,6 @@ def process(light, buttons):
 
 if __name__ == "__main__":
     data = load_data()
-    lights = []
-    for x in data:
-        results = re.findall(r"\[([\.\#]+)\]", x)
-        light = []
-        for char in results[0]:
-            if char == '.':
-                light.append(False)
-            else:
-                light.append(True)
-        lights.append(light)
-
     buttons = []
     for x in data:
         sub_buttons = []
@@ -49,9 +38,9 @@ if __name__ == "__main__":
             sub_buttons.append(bs)
         buttons.append(sub_buttons)
 
-    sum = 0
-    for i in range(len(lights)):
-        result = process(lights[i], buttons[i])
-        sum += result
-
-    print(sum)
+    joltages = []
+    for x in data:
+        results = re.findall(r"\{([\d,]+)\}", x)
+        for r in results:
+            js = [int(x) for x in r.split(',')]
+        joltages.append(js)
