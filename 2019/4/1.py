@@ -1,0 +1,40 @@
+FILENAME = "input.txt"
+
+
+def load_data():
+    with open(FILENAME) as file:
+        return file.read().split('-')
+
+
+def two_adjacent(x):
+    x = str(x)
+    return x[0] == x[1] or x[1] == x[2] or x[2] == x[3] or x[3] == x[4] or x[4] == x[5]
+
+def never_decrease(x):
+    x = str(x)
+    x0 = int(x[0])
+    x1 = int(x[1])
+    x2 = int(x[2])
+    x3 = int(x[3])
+    x4 = int(x[4])
+    x5 = int(x[5])
+    return x0 <= x1 and x1 <= x2 and x2 <= x3 and x3 <= x4 and x4 <= x5
+
+
+def is_valid_password(x):
+    return two_adjacent(x) and never_decrease(x)
+
+
+if __name__ == "__main__":
+    data = load_data()
+    x1, x2 = data
+    x1 = int(x1)
+    x2 = int(x2)
+
+    result = 0
+    for x in range(x1, x2 + 1):
+        if is_valid_password(x):
+            print(x)
+            result += 1
+
+    print(result)
