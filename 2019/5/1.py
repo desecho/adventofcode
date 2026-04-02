@@ -9,8 +9,8 @@ def load_data():
 if __name__ == "__main__":
     data = load_data()
     data = [int(x) for x in data]
-    data[1] = 12
-    data[2] = 2
+    # data[1] = 12
+    # data[2] = 2
     i = 0
 
     while i < len(data):
