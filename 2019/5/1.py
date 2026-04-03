@@ -12,10 +12,12 @@ if __name__ == "__main__":
     # data[1] = 12
     # data[2] = 2
     i = 0
+    output = []
 
     while i < len(data):
         op = data[i]
         if op == 99:
+            print(output[-1])
             break
         str_op = str(op)
         if len(str_op) == 1:
@@ -36,10 +38,12 @@ if __name__ == "__main__":
             elif op == 3:
                 shift = 2
                 v1 = data[i+1]
+                data[v1] = INPUT
             elif op == 4:
                 shift = 2
                 v1 = data[i+1]
-                print(data[v1])
+                output.append(data[v1])
+                # print(data[v1])
         else:
             op = int(str_op[-2:])
             modes = str_op[:-2]
@@ -54,18 +58,29 @@ if __name__ == "__main__":
                 v1 = data[i+1]
             else:
                 v1 = data[data[i+1]]
-            if m2 == 1:
-                v2 = data[i+2]
-            else:
-                v2 = data[data[i+2]]
-            if m3 == 1:
-                raise(Exception("error"))
-            else:
-                v3 = data[i+3]
+            if op < 3:
+                if m2 == 1:
+                    v2 = data[i+2]
+                else:
+                    v2 = data[data[i+2]]
+                if m3 == 1:
+                    raise(Exception("error"))
+                else:
+                    v3 = data[i+3]
             shift = 4
             if op == 1:
                 data[v3] = v1 + v2
             elif op == 2:
                 data[v3] = v1 * v2
+            elif op == 3:
+                shift = 2
+                # v1 = data[i+1]
+                data[v1] = INPUT
+                if m1 == 0:
+                    raise(Exception("error"))
+            elif op == 4:
+                shift = 2
+                output.append(data[v1])
+                # print(data[v1])
 
         i += shift
