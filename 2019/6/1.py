@@ -1,4 +1,4 @@
-FILENAME = "input0.txt"
+FILENAME = "input.txt"
 
 def load_data():
     with open(FILENAME) as file:
@@ -6,37 +6,41 @@ def load_data():
 
 
 class LinkedTree:
-    branches = []
-
-    def __init__(self, id, root):
+    def __init__(self, id):
         self.id = id
+        self.root = None
+
+    def set_root(self, root):
         self.root = root
 
-    def add_branch(self, branch):
-        self.branches.append(branch)
+    def parent_count(self, counter = 0):
+        if self.root is None:
+            return counter
+        else:
+            counter += 1
+            return self.root.parent_count(counter)
 
 
-def find_root(data, id):
-    for x in data:
-        if x[0] == id:
-            return x
-    raise Exception('error')
-
-def find_roots(data, id):
-    roots = []
-    for x in data:
-        if x[0] == id:
-            roots.append(x)
-
-    assert len(roots) > 0
-    return roots
-
+def get_tree(id, trees):
+    if id in trees:
+        return trees[id]
+    return LinkedTree(id)
 
 
 if __name__ == "__main__":
     data = load_data()
     data = [x.split(')') for x in data]
-    root = find_root(data, "COM")
-    root = LinkedTree(root[0], None)
-    roots = find_roots(root[1])
-    for r in roots:
+    trees = {}
+    for x in data:
+        root = get_tree(x[0], trees)
+        branch = get_tree(x[1], trees)
+        branch.set_root(root)
+        trees[x[0]] = root
+        trees[x[1]] = branch
+
+    root = trees['COM']
+    result = 0
+    for tree in trees.values():
+        result += tree.parent_count()
+
+    print(result)
