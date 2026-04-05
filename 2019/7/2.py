@@ -1,6 +1,6 @@
 from itertools import permutations
 
-FILENAME = "input.txt"
+FILENAME = "input0.txt"
 
 def load_data():
     with open(FILENAME) as file:
